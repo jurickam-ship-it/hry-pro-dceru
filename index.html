@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="color-scheme" content="light">
+<title>Hry s tátou</title>
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --card: #ffffff;
+    --ink: #3a3a3a;
+    --muted: #6b6b6b;
+    --soft: #e8e2d6;
+    --accent: #7a9e7e;
+    --accent-dark: #5f7f63;
+    --blue: #7a9eb8;
+    --yellow: #e6c86e;
+    --red: #d9897a;
+    --green: #8fbc8f;
+    --purple: #b39bc7;
+    --orange: #e0a873;
+    --shadow: 0 8px 24px rgba(58, 58, 58, 0.08);
+    --radius: 24px;
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: "Segoe UI", "Nunito", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    padding-bottom: 40px;
+  }
+
+  button {
+    font-family: inherit;
+    border: none;
+    cursor: pointer;
+    background: none;
+    color: inherit;
+  }
+
+  .screen { display: none; width: 100%; max-width: 720px; }
+  .screen.active { display: block; }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #e7f0e8;
+    color: var(--accent-dark);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-size: clamp(28px, 6vw, 40px);
+    margin: 8px 0 4px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 17px;
+    margin: 0 0 24px;
+  }
+
+  .home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  @media (max-width: 480px) {
+    .home-grid { grid-template-columns: 1fr; }
+  }
+
+  .activity-btn {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px 18px;
+    min-height: 140px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .activity-btn:active { transform: scale(0.97); }
+  .activity-btn .emoji { font-size: 42px; line-height: 1; }
+  .activity-btn .title { font-size: 20px; font-weight: 700; }
+  .activity-btn .desc { font-size: 14px; color: var(--muted); }
+
+  .activity-btn.c1 { border-top: 6px solid var(--blue); }
+  .activity-btn.c2 { border-top: 6px solid var(--yellow); }
+  .activity-btn.c3 { border-top: 6px solid var(--purple); }
+  .activity-btn.c4 { border-top: 6px solid var(--green); }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .back-btn, .speak-btn {
+    min-width: 64px;
+    min-height: 64px;
+    border-radius: 18px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+    font-size: 22px;
+    font-weight: 700;
+    padding: 0 16px;
+  }
+
+  .progress-dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--soft);
+  }
+  .dot.on { background: var(--accent); }
+  .dot.done { background: var(--accent-dark); }
+
+  .prompt-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    margin-bottom: 18px;
+    text-align: center;
+  }
+
+  .prompt-card .big {
+    font-size: clamp(22px, 5vw, 28px);
+    font-weight: 800;
+    margin: 0 0 8px;
+  }
+
+  .prompt-card .hint {
+    color: var(--muted);
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .dad-hint {
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--accent-dark);
+    background: #e7f0e8;
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+
+  .play-area {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    min-height: 280px;
+  }
+
+  /* Sorting */
+  .items-row, .baskets-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .item-chip, .basket, .num-btn, .card, .animal-btn {
+    min-width: 72px;
+    min-height: 72px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    user-select: none;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, outline 0.12s ease;
+  }
+
+  .item-chip {
+    background: var(--soft);
+    padding: 8px;
+    cursor: pointer;
+  }
+  .item-chip.selected {
+    outline: 4px solid var(--accent);
+    transform: scale(1.06);
+  }
+  .item-chip.placed { opacity: 0.25; pointer-events: none; }
+
+  .baskets-row { margin-top: 24px; gap: 16px; }
+
+  .basket {
+    flex-direction: column;
+    gap: 4px;
+    width: 120px;
+    min-height: 110px;
+    padding: 12px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .basket .b-emoji { font-size: 36px; }
+  .basket.glow { outline: 4px solid #333; outline-offset: 3px; }
+
+  /* Animals */
+  .animals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 420px) {
+    .animals-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  .animal-btn {
+    background: var(--soft);
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 8px;
+    min-height: 100px;
+  }
+  .animal-btn .a-emoji { font-size: 44px; }
+  .animal-btn .a-name { font-size: 14px; font-weight: 700; color: var(--ink); }
+  .animal-btn.correct { background: #d8edd8; outline: 3px solid var(--accent); }
+  .animal-btn.nudge { animation: nudge 0.4s ease; }
+
+  @keyframes nudge {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+  }
+
+  /* Memory */
+  .memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  @media (max-width: 420px) {
+    .memory-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .card {
+    background: var(--blue);
+    color: #fff;
+    aspect-ratio: 1;
+    width: 100%;
+    min-height: 72px;
+    font-size: 40px;
+  }
+  .card.back::after { content: "?"; font-size: 28px; font-weight: 800; opacity: 0.9; }
+  .card.flipped, .card.matched {
+    background: var(--soft);
+    color: var(--ink);
+  }
+  .card.matched { opacity: 0.55; }
+  .card:disabled { cursor: default; }
+
+  .pair-choice {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .pair-choice button {
+    min-height: 56px;
+    min-width: 120px;
+    padding: 12px 20px;
+    border-radius: 16px;
+    background: var(--soft);
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .pair-choice button.on {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* Count */
+  .count-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 24px;
+    min-height: 90px;
+    align-items: center;
+  }
+  .count-item { font-size: 48px; }
+
+  .numbers-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .num-btn {
+    width: 72px;
+    height: 72px;
+    background: var(--soft);
+    font-size: 32px;
+    font-weight: 800;
+  }
+  .num-btn.correct { background: #d8edd8; outline: 3px solid var(--accent); }
+  .num-btn.nudge { animation: nudge 0.4s ease; }
+
+  /* End screen */
+  .end-wrap {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .end-wrap .big-emoji { font-size: 72px; margin-bottom: 12px; }
+  .end-wrap h2 {
+    font-size: clamp(26px, 6vw, 34px);
+    margin: 0 0 8px;
+  }
+  .end-wrap p {
+    color: var(--muted);
+    font-size: 18px;
+    margin: 0 0 28px;
+  }
+  .end-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .primary-btn, .secondary-btn {
+    min-height: 72px;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 16px 24px;
+  }
+  .primary-btn {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: var(--shadow);
+  }
+  .secondary-btn {
+    background: var(--card);
+    box-shadow: var(--shadow);
+  }
+
+  footer {
+    margin-top: 32px;
+    max-width: 720px;
+    width: 100%;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 0 8px;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--accent-dark);
+    color: #fff;
+    padding: 14px 22px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 16px;
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 50;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+  <!-- HOME -->
+  <div id="screen-home" class="screen active">
+    <div class="badge">👨‍👧 Společně s tátou</div>
+    <h1>Hry s tátou</h1>
+    <p class="subtitle">Vyber si hru. Hrajeme spolu, klidně a bez spěchu.</p>
+    <div class="home-grid">
+      <button class="activity-btn c1" data-act="sort" type="button">
+        <span class="emoji">🎨</span>
+        <span class="title">Třídění</span>
+        <span class="desc">Barvy a tvary do košíků</span>
+      </button>
+      <button class="activity-btn c2" data-act="animals" type="button">
+        <span class="emoji">🐄</span>
+        <span class="title">Zvířátka</span>
+        <span class="desc">Kdo dělá bú?</span>
+      </button>
+      <button class="activity-btn c3" data-act="memory" type="button">
+        <span class="emoji">🃏</span>
+        <span class="title">Pexeso</span>
+        <span class="desc">Najdi stejné dvojice</span>
+      </button>
+      <button class="activity-btn c4" data-act="count" type="button">
+        <span class="emoji">🔢</span>
+        <span class="title">Počítání</span>
+        <span class="desc">Spočítej do pěti</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ACTIVITY -->
+  <div id="screen-play" class="screen">
+    <div class="topbar">
+      <button class="back-btn" id="btn-back" type="button" aria-label="Zpět">←</button>
+      <div class="progress-dots" id="progress"></div>
+      <button class="speak-btn" id="btn-speak" type="button" aria-label="Přečíst">🔊</button>
+    </div>
+    <div class="prompt-card">
+      <p class="big" id="prompt-text">…</p>
+      <p class="hint" id="prompt-hint"></p>
+      <div class="dad-hint" id="dad-hint"></div>
+    </div>
+    <div class="play-area" id="play-area"></div>
+  </div>
+
+  <!-- END -->
+  <div id="screen-end" class="screen">
+    <div class="end-wrap">
+      <div class="big-emoji">🌟</div>
+      <h2>Hotovo, končíme</h2>
+      <p>Krásně jste to zvládli spolu.<br>Chceš ještě jednou s tátou?</p>
+      <div class="end-actions">
+        <button class="primary-btn" id="btn-again" type="button">Ještě jednou</button>
+        <button class="secondary-btn" id="btn-home" type="button">Zpátky na výběr</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Žádná data se neukládají. Žádné reklamy, žádné nákupy, žádné odkazy ven.<br>
+    Hraje se offline v prohlížeči. Společně s tátou.
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------- Audio (quiet success chime) ----------
+  let audioCtx = null;
+  function ensureAudio() {
+    if (!audioCtx) {
+      try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+      catch (e) { audioCtx = null; }
+    }
+    if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+  }
+  function chime() {
+    ensureAudio();
+    if (!audioCtx) return;
+    const t0 = audioCtx.currentTime;
+    [523.25, 659.25, 783.99].forEach((freq, i) => {
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.type = "sine";
+      o.frequency.value = freq;
+      g.gain.setValueAtTime(0, t0);
+      g.gain.linearRampToValueAtTime(0.06, t0 + 0.02 + i * 0.08);
+      g.gain.exponentialRampToValueAtTime(0.001, t0 + 0.45 + i * 0.08);
+      o.connect(g);
+      g.connect(audioCtx.destination);
+      o.start(t0 + i * 0.08);
+      o.stop(t0 + 0.5 + i * 0.08);
+    });
+  }
+  function softClick() {
+    ensureAudio();
+    if (!audioCtx) return;
+    const t0 = audioCtx.currentTime;
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = "sine";
+    o.frequency.value = 440;
+    g.gain.setValueAtTime(0.03, t0);
+    g.gain.exponentialRampToValueAtTime(0.001, t0 + 0.08);
+    o.connect(g);
+    g.connect(audioCtx.destination);
+    o.start(t0);
+    o.stop(t0 + 0.09);
+  }
+
+  // ---------- Speech (Czech) ----------
+  let voices = [];
+  function loadVoices() {
+    voices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+  }
+  if (window.speechSynthesis) {
+    loadVoices();
+    speechSynthesis.onvoiceschanged = loadVoices;
+  }
+  function speak(text) {
+    if (!window.speechSynthesis || !text) return;
+    try {
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = "cs-CZ";
+      u.rate = 0.9;
+      u.pitch = 1.05;
+      const cs = voices.find(v => /cs|Czech|češt/i.test(v.lang + v.name));
+      if (cs) u.voice = cs;
+      speechSynthesis.speak(u);
+    } catch (e) { /* ignore */ }
+  }
+
+  // ---------- Dom helpers ----------
+  const $ = (sel) => document.querySelector(sel);
+  const screens = {
+    home: $("#screen-home"),
+    play: $("#screen-play"),
+    end: $("#screen-end"),
+  };
+  function showScreen(name) {
+    Object.values(screens).forEach(s => s.classList.remove("active"));
+    screens[name].classList.add("active");
+    window.scrollTo(0, 0);
+  }
+  function toast(msg) {
+    const el = $("#toast");
+    el.textContent = msg;
+    el.classList.add("show");
+    setTimeout(() => el.classList.remove("show"), 1400);
+  }
+
+  // ---------- State ----------
+  let currentAct = null;
+  let round = 0;
+  let totalRounds = 4;
+  let lastPrompt = "";
+  let againAct = null;
+  let busy = false;
+
+  function setProgress() {
+    const box = $("#progress");
+    box.innerHTML = "";
+    for (let i = 0; i < totalRounds; i++) {
+      const d = document.createElement("div");
+      d.className = "dot" + (i < round ? " done" : i === round ? " on" : "");
+      box.appendChild(d);
+    }
+  }
+
+  function setPrompt(big, hint, dad) {
+    lastPrompt = big + (hint ? ". " + hint : "");
+    $("#prompt-text").textContent = big;
+    $("#prompt-hint").textContent = hint || "";
+    const dh = $("#dad-hint");
+    if (dad) {
+      dh.textContent = dad;
+      dh.classList.remove("hidden");
+    } else {
+      dh.classList.add("hidden");
+    }
+  }
+
+  function finishActivity() {
+    againAct = currentAct;
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    speak("Hotovo, končíme. Chceš ještě jednou s tátou?");
+    showScreen("end");
+  }
+
+  function nextRoundOrEnd() {
+    round++;
+    if (round >= totalRounds) {
+      setTimeout(finishActivity, 700);
+    } else {
+      setTimeout(() => startRound(), 650);
+    }
+  }
+
+  // ---------- Activities ----------
+  const COLORS = [
+    { id: "red", name: "červená", emoji: "🔴", bg: "#d9897a" },
+    { id: "blue", name: "modrá", emoji: "🔵", bg: "#7a9eb8" },
+    { id: "yellow", name: "žlutá", emoji: "🟡", bg: "#e6c86e" },
+    { id: "green", name: "zelená", emoji: "🟢", bg: "#8fbc8f" },
+  ];
+  const SHAPES = [
+    { id: "circle", name: "kolečko", emoji: "⭕" },
+    { id: "square", name: "čtvereček", emoji: "⬜" },
+    { id: "triangle", name: "trojúhelník", emoji: "🔺" },
+    { id: "star", name: "hvězdička", emoji: "⭐" },
+  ];
+  const ANIMALS = [
+    { id: "cow", name: "kráva", emoji: "🐄", sound: "bú", phrase: "Kdo dělá bú?" },
+    { id: "dog", name: "pejsek", emoji: "🐕", sound: "haf", phrase: "Kdo dělá haf haf?" },
+    { id: "cat", name: "kočička", emoji: "🐈", sound: "mňau", phrase: "Kdo dělá mňau?" },
+    { id: "chicken", name: "slepice", emoji: "🐔", sound: "kokokodák", phrase: "Kdo dělá kokokodák?" },
+    { id: "pig", name: "prasátko", emoji: "🐖", sound: "chro", phrase: "Kdo dělá chro chro?" },
+    { id: "horse", name: "koník", emoji: "🐴", sound: "íhá", phrase: "Kdo dělá íhá?" },
+  ];
+  const MEMORY_EMOJIS = ["🍎", "🍌", "🚗", "🎈", "🐶", "⭐", "🌸", "🐟"];
+  const COUNT_EMOJIS = ["🍎", "⭐", "🎈", "🦋", "🍓", "🌼", "🐟", "🚗"];
+
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+  function pick(arr, n) {
+    return shuffle(arr).slice(0, n);
+  }
+
+  // --- Sort ---
+  let sortSelected = null;
+  let sortMode = "color";
+
+  function startSort() {
+    totalRounds = 4;
+    round = 0;
+    startRound();
+  }
+
+  function renderSort() {
+    const area = $("#play-area");
+    sortSelected = null;
+    sortMode = round % 2 === 0 ? "color" : "shape";
+
+    if (sortMode === "color") {
+      const baskets = pick(COLORS, 3);
+      const items = baskets.map(c => ({
+        id: c.id,
+        emoji: c.emoji,
+        label: c.name,
+        match: c.id,
+      }));
+      // add one extra of a random basket color
+      const extra = baskets[Math.floor(Math.random() * baskets.length)];
+      items.push({ id: extra.id + "-2", emoji: extra.emoji, label: extra.name, match: extra.id });
+      const shuffled = shuffle(items);
+
+      setPrompt(
+        "Dej stejné barvy do košíku",
+        "Nejdřív ťukni na obrázek, potom na košík.",
+        "Ukaž tátovi, kde je " + baskets[0].name + "."
+      );
+      speak("Dej stejné barvy do košíku. Ukaž tátovi, kde je " + baskets[0].name + ".");
+
+      area.innerHTML = "";
+      const row = document.createElement("div");
+      row.className = "items-row";
+      shuffled.forEach(it => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "item-chip";
+        b.textContent = it.emoji;
+        b.dataset.match = it.match;
+        b.addEventListener("click", () => {
+          if (busy || b.classList.contains("placed")) return;
+          softClick();
+          area.querySelectorAll(".item-chip").forEach(x => x.classList.remove("selected"));
+          b.classList.add("selected");
+          sortSelected = b;
+        });
+        row.appendChild(b);
+      });
+      area.appendChild(row);
+
+      const brow = document.createElement("div");
+      brow.className = "baskets-row";
+      baskets.forEach(c => {
+        const bk = document.createElement("button");
+        bk.type = "button";
+        bk.className = "basket";
+        bk.style.background = c.bg;
+        bk.innerHTML = '<span class="b-emoji">' + c.emoji + '</span><span>' + c.name + '</span>';
+        bk.dataset.id = c.id;
+        bk.addEventListener("click", () => onSortBasket(bk, area));
+        brow.appendChild(bk);
+      });
+      area.appendChild(brow);
+    } else {
+      const baskets = pick(SHAPES, 3);
+      const items = baskets.map(s => ({
+        id: s.id,
+        emoji: s.emoji,
+        label: s.name,
+        match: s.id,
+      }));
+      const extra = baskets[Math.floor(Math.random() * baskets.length)];
+      items.push({ id: extra.id + "-2", emoji: extra.emoji, label: extra.name, match: extra.id });
+      const shuffled = shuffle(items);
+
+      setPrompt(
+        "Dej stejné tvary do košíku",
+        "Nejdřív ťukni na tvar, potom na košík.",
+        "Ukaž tátovi, kde je " + baskets[0].name + "."
+      );
+      speak("Dej stejné tvary do košíku. Ukaž tátovi, kde je " + baskets[0].name + ".");
+
+      area.innerHTML = "";
+      const row = document.createElement("div");
+      row.className = "items-row";
+      shuffled.forEach(it => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "item-chip";
+        b.textContent = it.emoji;
+        b.dataset.match = it.match;
+        b.addEventListener("click", () => {
+          if (busy || b.classList.contains("placed")) return;
+          softClick();
+          area.querySelectorAll(".item-chip").forEach(x => x.classList.remove("selected"));
+          b.classList.add("selected");
+          sortSelected = b;
+        });
+        row.appendChild(b);
+      });
+      area.appendChild(row);
+
+      const brow = document.createElement("div");
+      brow.className = "baskets-row";
+      const shapeColors = ["#7a9eb8", "#d9897a", "#8fbc8f", "#b39bc7"];
+      baskets.forEach((s, i) => {
+        const bk = document.createElement("button");
+        bk.type = "button";
+        bk.className = "basket";
+        bk.style.background = shapeColors[i % shapeColors.length];
+        bk.innerHTML = '<span class="b-emoji">' + s.emoji + '</span><span>' + s.name + '</span>';
+        bk.dataset.id = s.id;
+        bk.addEventListener("click", () => onSortBasket(bk, area));
+        brow.appendChild(bk);
+      });
+      area.appendChild(brow);
+    }
+  }
+
+  function onSortBasket(bk, area) {
+    if (busy || !sortSelected) {
+      toast("Nejdřív ťukni na obrázek");
+      return;
+    }
+    if (sortSelected.dataset.match === bk.dataset.id) {
+      softClick();
+      sortSelected.classList.add("placed");
+      sortSelected.classList.remove("selected");
+      sortSelected = null;
+      const left = area.querySelectorAll(".item-chip:not(.placed)");
+      if (left.length === 0) {
+        busy = true;
+        chime();
+        toast("Šikovně!");
+        setTimeout(() => { busy = false; nextRoundOrEnd(); }, 500);
+      }
+    } else {
+      bk.classList.add("glow");
+      setTimeout(() => bk.classList.remove("glow"), 400);
+      toast("Zkus jiný košík");
+      speak("Zkus jiný košík.");
+    }
+  }
+
+  // --- Animals ---
+  function startAnimals() {
+    totalRounds = 5;
+    round = 0;
+    startRound();
+  }
+
+  function renderAnimals() {
+    const area = $("#play-area");
+    const target = ANIMALS[Math.floor(Math.random() * ANIMALS.length)];
+    const others = shuffle(ANIMALS.filter(a => a.id !== target.id)).slice(0, 5);
+    const choices = shuffle([target].concat(others));
+
+    setPrompt(
+      target.phrase,
+      "Ťukni na správné zvířátko.",
+      "Ukaž tátovi, kde je " + target.name + "."
+    );
+    speak(target.phrase + " Ukaž tátovi, kde je " + target.name + ".");
+
+    area.innerHTML = "";
+    const grid = document.createElement("div");
+    grid.className = "animals-grid";
+    choices.forEach(a => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "animal-btn";
+      b.innerHTML = '<span class="a-emoji">' + a.emoji + '</span><span class="a-name">' + a.name + '</span>';
+      b.addEventListener("click", () => {
+        if (busy) return;
+        if (a.id === target.id) {
+          busy = true;
+          b.classList.add("correct");
+          chime();
+          toast("Ano, " + target.name + "!");
+          speak("Ano, " + target.name + " dělá " + target.sound + ".");
+          setTimeout(() => { busy = false; nextRoundOrEnd(); }, 900);
+        } else {
+          b.classList.add("nudge");
+          setTimeout(() => b.classList.remove("nudge"), 400);
+          toast("Zkus to znovu");
+          speak("Zkus to znovu. " + target.phrase);
+        }
+      });
+      grid.appendChild(b);
+    });
+    area.appendChild(grid);
+  }
+
+  // --- Memory ---
+  let memoryPairs = 4;
+  let memoryFlipped = [];
+  let memoryLock = false;
+  let memoryMatched = 0;
+
+  function startMemory() {
+    // First show pair choice, then rounds of games
+    totalRounds = 3;
+    round = 0;
+    memoryPairs = 4;
+    showMemorySetup();
+  }
+
+  function showMemorySetup() {
+    const area = $("#play-area");
+    setPrompt(
+      "Pexeso s tátou",
+      "Vyber, kolik dvojic chcete najít.",
+      "Ukaž tátovi, kolik dvojic chcete."
+    );
+    speak("Pexeso s tátou. Vyber, kolik dvojic chcete najít.");
+    area.innerHTML = "";
+    const choice = document.createElement("div");
+    choice.className = "pair-choice";
+    [4, 6].forEach(n => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.textContent = n + " dvojic";
+      if (n === memoryPairs) b.classList.add("on");
+      b.addEventListener("click", () => {
+        softClick();
+        memoryPairs = n;
+        choice.querySelectorAll("button").forEach(x => x.classList.remove("on"));
+        b.classList.add("on");
+        setTimeout(() => startRound(), 300);
+      });
+      choice.appendChild(b);
+    });
+    area.appendChild(choice);
+  }
+
+  function renderMemory() {
+    const area = $("#play-area");
+    memoryFlipped = [];
+    memoryLock = false;
+    memoryMatched = 0;
+    const emojis = pick(MEMORY_EMOJIS, memoryPairs);
+    const cards = shuffle(emojis.concat(emojis).map((e, i) => ({ id: i, emoji: e })));
+
+    setPrompt(
+      "Najdi stejné dvojice",
+      "Ťukni na dvě kartičky.",
+      "Ukaž tátovi, kde jsou dvě stejné."
+    );
+    speak("Najdi stejné dvojice. Ukaž tátovi, kde jsou dvě stejné.");
+
+    area.innerHTML = "";
+    const grid = document.createElement("div");
+    grid.className = "memory-grid";
+    if (memoryPairs === 6) grid.style.gridTemplateColumns = "repeat(4, 1fr)";
+
+    cards.forEach((c, idx) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "card back";
+      b.dataset.emoji = c.emoji;
+      b.dataset.idx = idx;
+      b.addEventListener("click", () => onMemoryFlip(b, grid));
+      grid.appendChild(b);
+    });
+    area.appendChild(grid);
+  }
+
+  function onMemoryFlip(b, grid) {
+    if (memoryLock || busy) return;
+    if (b.classList.contains("flipped") || b.classList.contains("matched")) return;
+    softClick();
+    b.classList.remove("back");
+    b.classList.add("flipped");
+    b.textContent = b.dataset.emoji;
+    memoryFlipped.push(b);
+    if (memoryFlipped.length < 2) return;
+
+    memoryLock = true;
+    const [a, c] = memoryFlipped;
+    if (a.dataset.emoji === c.dataset.emoji) {
+      a.classList.add("matched");
+      c.classList.add("matched");
+      memoryMatched++;
+      memoryFlipped = [];
+      memoryLock = false;
+      if (memoryMatched >= memoryPairs) {
+        busy = true;
+        chime();
+        toast("Všechny dvojice!");
+        speak("Výborně, všechny dvojice!");
+        setTimeout(() => { busy = false; nextRoundOrEnd(); }, 900);
+      }
+    } else {
+      setTimeout(() => {
+        a.classList.add("back");
+        c.classList.add("back");
+        a.classList.remove("flipped");
+        c.classList.remove("flipped");
+        a.textContent = "";
+        c.textContent = "";
+        memoryFlipped = [];
+        memoryLock = false;
+      }, 700);
+    }
+  }
+
+  // --- Count ---
+  function startCount() {
+    totalRounds = 5;
+    round = 0;
+    startRound();
+  }
+
+  function renderCount() {
+    const area = $("#play-area");
+    // Prefer 1..5 covering all across rounds
+    const n = ((round % 5) + 1);
+    // occasionally shuffle so not always sequential
+    const count = Math.random() < 0.35 ? (1 + Math.floor(Math.random() * 5)) : n;
+    const emoji = COUNT_EMOJIS[Math.floor(Math.random() * COUNT_EMOJIS.length)];
+
+    setPrompt(
+      "Kolik jich je?",
+      "Spočítej a ťukni na číslo.",
+      "Ukaž tátovi číslo " + count + "."
+    );
+    speak("Kolik jich je? Spočítej a ťukni na číslo. Ukaž tátovi číslo " + count + ".");
+
+    area.innerHTML = "";
+    const items = document.createElement("div");
+    items.className = "count-items";
+    for (let i = 0; i < count; i++) {
+      const span = document.createElement("span");
+      span.className = "count-item";
+      span.textContent = emoji;
+      items.appendChild(span);
+    }
+    area.appendChild(items);
+
+    const row = document.createElement("div");
+    row.className = "numbers-row";
+    [1, 2, 3, 4, 5].forEach(num => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "num-btn";
+      b.textContent = String(num);
+      b.addEventListener("click", () => {
+        if (busy) return;
+        if (num === count) {
+          busy = true;
+          b.classList.add("correct");
+          chime();
+          toast("Ano, " + count + "!");
+          speak("Ano, je jich " + count + ".");
+          setTimeout(() => { busy = false; nextRoundOrEnd(); }, 800);
+        } else {
+          b.classList.add("nudge");
+          setTimeout(() => b.classList.remove("nudge"), 400);
+          toast("Zkus jiné číslo");
+          speak("Zkus jiné číslo.");
+        }
+      });
+      row.appendChild(b);
+    });
+    area.appendChild(row);
+  }
+
+  // ---------- Round dispatcher ----------
+  function startRound() {
+    busy = false;
+    setProgress();
+    if (currentAct === "sort") renderSort();
+    else if (currentAct === "animals") renderAnimals();
+    else if (currentAct === "memory") {
+      if (round === 0 && $("#play-area").querySelector(".pair-choice")) {
+        // coming from setup choice already handled
+      }
+      renderMemory();
+    }
+    else if (currentAct === "count") renderCount();
+  }
+
+  function startActivity(act) {
+    ensureAudio();
+    currentAct = act;
+    againAct = act;
+    showScreen("play");
+    if (act === "sort") startSort();
+    else if (act === "animals") startAnimals();
+    else if (act === "memory") startMemory();
+    else if (act === "count") startCount();
+  }
+
+  // ---------- Wire up ----------
+  document.querySelectorAll(".activity-btn").forEach(btn => {
+    btn.addEventListener("click", () => startActivity(btn.dataset.act));
+  });
+  $("#btn-back").addEventListener("click", () => {
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    showScreen("home");
+  });
+  $("#btn-speak").addEventListener("click", () => speak(lastPrompt));
+  $("#btn-again").addEventListener("click", () => {
+    if (againAct) startActivity(againAct);
+  });
+  $("#btn-home").addEventListener("click", () => {
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    showScreen("home");
+  });
+
+  // Warm up speech on first tap anywhere
+  document.body.addEventListener("click", function once() {
+    ensureAudio();
+    loadVoices();
+    document.body.removeEventListener("click", once);
+  }, { once: true });
+})();
+</script>
+</body>
+</html>
