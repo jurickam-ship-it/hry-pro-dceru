@@ -1,0 +1,607 @@
+{
+  "Vyber si hru. Hrajeme spolu, klidně a bez spěchu.": {
+    "file": "v0.mp3",
+    "start": 0.05,
+    "end": 3.68
+  },
+  "Ahoj, já jsem Líza. Naučíme se jemně pískat na flétnu.": {
+    "file": "v0.mp3",
+    "start": 3.99,
+    "end": 8.18
+  },
+  "Tohle přijde, až zvládneme předchozí kousek.": {
+    "file": "v0.mp3",
+    "start": 8.51,
+    "end": 11.3
+  },
+  "Foukej jemně, ať svíčka hoří. Ne moc silně.": {
+    "file": "v0.mp3",
+    "start": 11.61,
+    "end": 14.92
+  },
+  "Míň foukej.": {
+    "file": "v0.mp3",
+    "start": 15.15,
+    "end": 16.18
+  },
+  "Šikovně. Ještě jednou.": {
+    "file": "v0.mp3",
+    "start": 16.39,
+    "end": 18.26
+  },
+  "Foukej déle.": {
+    "file": "v0.mp3",
+    "start": 18.47,
+    "end": 19.5
+  },
+  "Ještě chvilku.": {
+    "file": "v0.mp3",
+    "start": 19.67,
+    "end": 20.71
+  },
+  "Dech byl jemný. Líza ti tleská. Jedna lekce stačí.": {
+    "file": "v0.mp3",
+    "start": 20.93,
+    "end": 24.89
+  },
+  "Levá ruka je nahoře, blízko pusy.": {
+    "file": "v0.mp3",
+    "start": 25.13,
+    "end": 27.46
+  },
+  "Palec schováme vzadu. Na obrázku je vedle, ať ho vidíme.": {
+    "file": "v0.mp3",
+    "start": 27.65,
+    "end": 31.52
+  },
+  "Pravá ruka je dole a zatím jen drží.": {
+    "file": "v0.mp3",
+    "start": 31.73,
+    "end": 34.15
+  },
+  "Kde je levá ruka?": {
+    "file": "v0.mp3",
+    "start": 34.41,
+    "end": 35.6
+  },
+  "Levá ruka je nahoře.": {
+    "file": "v0.mp3",
+    "start": 35.89,
+    "end": 37.3
+  },
+  "Levá nahoře, palec vzadu, pravá odpočívá. Tak se flétna drží.": {
+    "file": "v0.mp3",
+    "start": 37.51,
+    "end": 42.37
+  },
+  "Poslouchej.": {
+    "file": "v0.mp3",
+    "start": 42.61,
+    "end": 43.5
+  },
+  "Teď ty.": {
+    "file": "v0.mp3",
+    "start": 43.61,
+    "end": 44.28
+  },
+  "Ozvěna se povedla. Há, á a gé už jdou za sebou.": {
+    "file": "v0.mp3",
+    "start": 44.55,
+    "end": 48.39
+  },
+  "Buchtičky. Há, á a gé.": {
+    "file": "v0.mp3",
+    "start": 48.51,
+    "end": 50.85
+  },
+  "Skákal pes. Gé, á, há a vysoké cé.": {
+    "file": "v0.mp3",
+    "start": 51.1,
+    "end": 54.52
+  },
+  "Kočička. Há, á a gé.": {
+    "file": "v0.mp3",
+    "start": 54.78,
+    "end": 56.91
+  },
+  "Krásně. Chceš ještě kousek?": {
+    "file": "v0.mp3",
+    "start": 57.12,
+    "end": 59.19
+  },
+  "Ještě kousek.": {
+    "file": "v0.mp3",
+    "start": 59.3,
+    "end": 60.34
+  },
+  "Buchtičky. Krásně jste to zvládli spolu. Jedna písnička stačí.": {
+    "file": "v0.mp3",
+    "start": 60.42,
+    "end": 64.7
+  },
+  "Skákal pes. Krásně jste to zvládli spolu. Jedna písnička stačí.": {
+    "file": "v0.mp3",
+    "start": 64.9,
+    "end": 69.34
+  },
+  "Kočička. Krásně jste to zvládli spolu. Jedna písnička stačí.": {
+    "file": "v0.mp3",
+    "start": 69.5,
+    "end": 73.65
+  },
+  "Hotovo, končíme. Chceš ještě jednou s tátou?": {
+    "file": "v0.mp3",
+    "start": 73.8,
+    "end": 76.93
+  },
+  "Šikovně.": {
+    "file": "v0.mp3",
+    "start": 77.08,
+    "end": 77.81
+  },
+  "Zkus jiný košík.": {
+    "file": "v0.mp3",
+    "start": 77.94,
+    "end": 79.2
+  },
+  "Zkus jiné číslo.": {
+    "file": "v0.mp3",
+    "start": 79.26,
+    "end": 80.55
+  },
+  "Pexeso s tátou. Vyber, kolik dvojic chcete najít.": {
+    "file": "v0.mp3",
+    "start": 80.66,
+    "end": 84.01
+  },
+  "Najdi stejné dvojice. Ukaž tátovi, kde jsou dvě stejné.": {
+    "file": "v0.mp3",
+    "start": 84.12,
+    "end": 87.85
+  },
+  "Výborně, všechny dvojice!": {
+    "file": "v0.mp3",
+    "start": 88.08,
+    "end": 89.92
+  },
+  "Zakryj palec.": {
+    "file": "v0.mp3",
+    "start": 90.06,
+    "end": 91.07
+  },
+  "Palec nech volný.": {
+    "file": "v0.mp3",
+    "start": 91.2,
+    "end": 92.36
+  },
+  "Zakryj lísteček.": {
+    "file": "v0.mp3",
+    "start": 92.5,
+    "end": 93.74
+  },
+  "Lísteček nech volný.": {
+    "file": "v0.mp3",
+    "start": 93.82,
+    "end": 95.2
+  },
+  "Zakryj kytku.": {
+    "file": "v0.mp3",
+    "start": 95.36,
+    "end": 96.37
+  },
+  "Kytku nech volnou.": {
+    "file": "v0.mp3",
+    "start": 96.48,
+    "end": 97.71
+  },
+  "Zakryj houbičku.": {
+    "file": "v0.mp3",
+    "start": 97.82,
+    "end": 98.99
+  },
+  "Houbičku nech volnou.": {
+    "file": "v0.mp3",
+    "start": 99.08,
+    "end": 100.63
+  },
+  "Poslouchej tón gé. Palec, lísteček, kytka a houbička.": {
+    "file": "v1.mp3",
+    "start": 0.03,
+    "end": 5.24
+  },
+  "Ano. Tón gé.": {
+    "file": "v1.mp3",
+    "start": 5.65,
+    "end": 7.28
+  },
+  "Tón gé.": {
+    "file": "v1.mp3",
+    "start": 7.79,
+    "end": 8.63
+  },
+  "Zahraj na flétnu tón gé.": {
+    "file": "v1.mp3",
+    "start": 9.19,
+    "end": 11.0
+  },
+  "Teď ty. Palec, lísteček, kytka a houbička.": {
+    "file": "v1.mp3",
+    "start": 11.41,
+    "end": 15.47
+  },
+  "Takhle zní gé.": {
+    "file": "v1.mp3",
+    "start": 15.81,
+    "end": 16.91
+  },
+  "Ano. To je gé.": {
+    "file": "v1.mp3",
+    "start": 17.35,
+    "end": 18.79
+  },
+  "To je gé. Zkus druhý.": {
+    "file": "v1.mp3",
+    "start": 19.25,
+    "end": 21.32
+  },
+  "Který tón je gé? Ťukni na něj.": {
+    "file": "v1.mp3",
+    "start": 21.61,
+    "end": 24.13
+  },
+  "Tón gé už Líza zná. Palec, lísteček, kytka a houbička.": {
+    "file": "v1.mp3",
+    "start": 24.37,
+    "end": 29.26
+  },
+  "Poslouchej tón á. Palec, lísteček a kytka.": {
+    "file": "v1.mp3",
+    "start": 29.55,
+    "end": 33.41
+  },
+  "Ano. Tón á.": {
+    "file": "v1.mp3",
+    "start": 33.73,
+    "end": 35.14
+  },
+  "Tón á.": {
+    "file": "v1.mp3",
+    "start": 35.55,
+    "end": 36.31
+  },
+  "Zahraj na flétnu tón á.": {
+    "file": "v1.mp3",
+    "start": 36.75,
+    "end": 38.48
+  },
+  "Teď ty. Palec, lísteček a kytka.": {
+    "file": "v1.mp3",
+    "start": 38.87,
+    "end": 41.94
+  },
+  "Takhle zní á.": {
+    "file": "v1.mp3",
+    "start": 42.23,
+    "end": 43.3
+  },
+  "Ano. To je á.": {
+    "file": "v1.mp3",
+    "start": 43.71,
+    "end": 45.04
+  },
+  "To je á. Zkus druhý.": {
+    "file": "v1.mp3",
+    "start": 45.45,
+    "end": 47.48
+  },
+  "Který tón je á? Ťukni na něj.": {
+    "file": "v1.mp3",
+    "start": 47.75,
+    "end": 50.19
+  },
+  "Tón á už Líza zná. Palec, lísteček a kytka.": {
+    "file": "v1.mp3",
+    "start": 50.41,
+    "end": 54.42
+  },
+  "Poslouchej tón há. Palec a lísteček.": {
+    "file": "v1.mp3",
+    "start": 54.72,
+    "end": 57.99
+  },
+  "Ano. Tón há.": {
+    "file": "v1.mp3",
+    "start": 58.22,
+    "end": 59.58
+  },
+  "Tón há.": {
+    "file": "v1.mp3",
+    "start": 59.98,
+    "end": 60.73
+  },
+  "Zahraj na flétnu tón há.": {
+    "file": "v1.mp3",
+    "start": 61.14,
+    "end": 62.85
+  },
+  "Teď ty. Palec a lísteček.": {
+    "file": "v1.mp3",
+    "start": 63.2,
+    "end": 65.67
+  },
+  "Takhle zní há.": {
+    "file": "v1.mp3",
+    "start": 65.9,
+    "end": 66.96
+  },
+  "Ano. To je há.": {
+    "file": "v1.mp3",
+    "start": 67.34,
+    "end": 68.66
+  },
+  "To je há. Zkus druhý.": {
+    "file": "v1.mp3",
+    "start": 69.02,
+    "end": 71.0
+  },
+  "Který tón je há? Ťukni na něj.": {
+    "file": "v1.mp3",
+    "start": 71.26,
+    "end": 73.68
+  },
+  "Tón há už Líza zná. Palec a lísteček.": {
+    "file": "v1.mp3",
+    "start": 73.88,
+    "end": 77.25
+  },
+  "Poslouchej tón vysoké cé. Jen palec.": {
+    "file": "v1.mp3",
+    "start": 77.46,
+    "end": 80.47
+  },
+  "Ano. Tón vysoké cé.": {
+    "file": "v1.mp3",
+    "start": 80.78,
+    "end": 82.61
+  },
+  "Tón vysoké cé.": {
+    "file": "v1.mp3",
+    "start": 82.92,
+    "end": 84.16
+  },
+  "Zahraj na flétnu tón vysoké cé.": {
+    "file": "v1.mp3",
+    "start": 84.54,
+    "end": 86.69
+  },
+  "Teď ty. Jen palec.": {
+    "file": "v1.mp3",
+    "start": 87.0,
+    "end": 88.76
+  },
+  "Takhle zní cé.": {
+    "file": "v1.mp3",
+    "start": 89.04,
+    "end": 90.13
+  },
+  "Ano. To je vysoké cé.": {
+    "file": "v1.mp3",
+    "start": 90.46,
+    "end": 92.19
+  },
+  "To je vysoké cé. Zkus druhý.": {
+    "file": "v1.mp3",
+    "start": 92.48,
+    "end": 94.83
+  },
+  "Který tón je vysoké cé? Ťukni na něj.": {
+    "file": "v1.mp3",
+    "start": 95.06,
+    "end": 97.88
+  },
+  "Tón cé už Líza zná. Jen palec.": {
+    "file": "v1.mp3",
+    "start": 98.06,
+    "end": 100.82
+  },
+  "Palec a lísteček.": {
+    "file": "v1.mp3",
+    "start": 101.1,
+    "end": 102.87
+  },
+  "Palec, lísteček a kytka.": {
+    "file": "v2.mp3",
+    "start": 0.01,
+    "end": 2.41
+  },
+  "Palec, lísteček, kytka a houbička.": {
+    "file": "v2.mp3",
+    "start": 2.79,
+    "end": 6.16
+  },
+  "Jen palec.": {
+    "file": "v2.mp3",
+    "start": 6.57,
+    "end": 7.66
+  },
+  "Dej stejné barvy do košíku. Ukaž tátovi, kde je červená.": {
+    "file": "v2.mp3",
+    "start": 8.07,
+    "end": 12.15
+  },
+  "Dej stejné barvy do košíku. Ukaž tátovi, kde je modrá.": {
+    "file": "v2.mp3",
+    "start": 12.53,
+    "end": 16.47
+  },
+  "Dej stejné barvy do košíku. Ukaž tátovi, kde je žlutá.": {
+    "file": "v2.mp3",
+    "start": 16.85,
+    "end": 20.8
+  },
+  "Dej stejné barvy do košíku. Ukaž tátovi, kde je zelená.": {
+    "file": "v2.mp3",
+    "start": 21.17,
+    "end": 25.12
+  },
+  "Dej stejné tvary do košíku. Ukaž tátovi, kde je kolečko.": {
+    "file": "v2.mp3",
+    "start": 25.43,
+    "end": 29.49
+  },
+  "Dej stejné tvary do košíku. Ukaž tátovi, kde je čtvereček.": {
+    "file": "v2.mp3",
+    "start": 29.73,
+    "end": 33.83
+  },
+  "Dej stejné tvary do košíku. Ukaž tátovi, kde je trojúhelník.": {
+    "file": "v2.mp3",
+    "start": 33.99,
+    "end": 38.15
+  },
+  "Dej stejné tvary do košíku. Ukaž tátovi, kde je hvězdička.": {
+    "file": "v2.mp3",
+    "start": 38.29,
+    "end": 42.31
+  },
+  "Kdo dělá bú? Ukaž tátovi, kde je kráva.": {
+    "file": "v2.mp3",
+    "start": 42.47,
+    "end": 45.52
+  },
+  "Ano, kráva dělá bú.": {
+    "file": "v2.mp3",
+    "start": 45.69,
+    "end": 47.31
+  },
+  "Zkus to znovu. Kdo dělá bú?": {
+    "file": "v2.mp3",
+    "start": 47.53,
+    "end": 49.57
+  },
+  "Kdo dělá haf haf? Ukaž tátovi, kde je pejsek.": {
+    "file": "v2.mp3",
+    "start": 49.91,
+    "end": 53.2
+  },
+  "Ano, pejsek dělá haf.": {
+    "file": "v2.mp3",
+    "start": 53.29,
+    "end": 55.05
+  },
+  "Zkus to znovu. Kdo dělá haf haf?": {
+    "file": "v2.mp3",
+    "start": 55.17,
+    "end": 57.55
+  },
+  "Kdo dělá mňau? Ukaž tátovi, kde je kočička.": {
+    "file": "v2.mp3",
+    "start": 57.67,
+    "end": 60.81
+  },
+  "Ano, kočička dělá mňau.": {
+    "file": "v2.mp3",
+    "start": 60.96,
+    "end": 62.84
+  },
+  "Zkus to znovu. Kdo dělá mňau?": {
+    "file": "v2.mp3",
+    "start": 62.94,
+    "end": 65.04
+  },
+  "Kdo dělá kokokodák? Ukaž tátovi, kde je slepice.": {
+    "file": "v2.mp3",
+    "start": 65.12,
+    "end": 68.65
+  },
+  "Ano, slepice dělá kokokodák.": {
+    "file": "v2.mp3",
+    "start": 68.78,
+    "end": 71.05
+  },
+  "Zkus to znovu. Kdo dělá kokokodák?": {
+    "file": "v2.mp3",
+    "start": 71.1,
+    "end": 73.6
+  },
+  "Kdo dělá chro chro? Ukaž tátovi, kde je prasátko.": {
+    "file": "v2.mp3",
+    "start": 73.62,
+    "end": 77.04
+  },
+  "Ano, prasátko dělá chro.": {
+    "file": "v2.mp3",
+    "start": 77.2,
+    "end": 78.99
+  },
+  "Zkus to znovu. Kdo dělá chro chro?": {
+    "file": "v2.mp3",
+    "start": 79.14,
+    "end": 81.35
+  },
+  "Kdo dělá íhá? Ukaž tátovi, kde je koník.": {
+    "file": "v2.mp3",
+    "start": 81.48,
+    "end": 84.62
+  },
+  "Ano, koník dělá íhá.": {
+    "file": "v2.mp3",
+    "start": 84.7,
+    "end": 86.44
+  },
+  "Zkus to znovu. Kdo dělá íhá?": {
+    "file": "v2.mp3",
+    "start": 86.62,
+    "end": 88.7
+  },
+  "Kolik jich je? Spočítej a ťukni na číslo. Ukaž tátovi číslo 1.": {
+    "file": "v2.mp3",
+    "start": 88.86,
+    "end": 93.42
+  },
+  "Ano, je jich 1.": {
+    "file": "v2.mp3",
+    "start": 93.6,
+    "end": 94.79
+  },
+  "Kolik jich je? Spočítej a ťukni na číslo. Ukaž tátovi číslo 2.": {
+    "file": "v2.mp3",
+    "start": 94.92,
+    "end": 99.44
+  },
+  "Ano, je jich 2.": {
+    "file": "v2.mp3",
+    "start": 99.58,
+    "end": 100.73
+  },
+  "Kolik jich je? Spočítej a ťukni na číslo. Ukaž tátovi číslo 3.": {
+    "file": "v2.mp3",
+    "start": 100.82,
+    "end": 105.5
+  },
+  "Ano, je jich 3.": {
+    "file": "v2.mp3",
+    "start": 105.46,
+    "end": 106.6
+  },
+  "Kolik jich je? Spočítej a ťukni na číslo. Ukaž tátovi číslo 4.": {
+    "file": "v2.mp3",
+    "start": 106.68,
+    "end": 111.24
+  },
+  "Ano, je jich 4.": {
+    "file": "v2.mp3",
+    "start": 111.4,
+    "end": 112.63
+  },
+  "Kolik jich je? Spočítej a ťukni na číslo. Ukaž tátovi číslo 5.": {
+    "file": "v2.mp3",
+    "start": 112.74,
+    "end": 117.18
+  },
+  "Ano, je jich 5.": {
+    "file": "v2.mp3",
+    "start": 117.34,
+    "end": 118.87
+  }
+}
